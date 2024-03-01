@@ -11,16 +11,18 @@ export const useTasks = selectedProject => {
         .firestore()
         .collection('tasks')
         .where('userId', '==', 'fd6b85d6969f11ee');
-        unsubscribe = selectedProject && !collatedTasksExist(selectedProject) 
-        ? (unsubscribe = unsubscribe.where('projectId', '==', selectedProject)) 
-        : selectedProject === 'TODAY' 
-        ? (unsubscribe = unsubscribe.where('date', '==', moment().format('DD/MM/YYYY'))) 
-        : selectedProject === 'INBOX' || selectedProject === 0 
-        ? (unsubscribe = unsubscribe.where('date', '==', '')) 
-        : unsubscribe;
+        
+        unsubscribe = 
+            selectedProject && !collatedTasksExist(selectedProject) 
+                ? (unsubscribe = unsubscribe.where('projectId', '==', selectedProject)) 
+                : selectedProject === 'TODAY' 
+                ? (unsubscribe = unsubscribe.where('date', '==', moment().format('DD/MM/YYYY'))) 
+                : selectedProject === 'INBOX' || selectedProject === 0 
+                ? (unsubscribe = unsubscribe.where('date', '==', '')) 
+                : unsubscribe;
         
         unsubscribe = unsubscribe.onSnapshot(snapshot => {
-            const newTasks = snapshot.docs.map(task ({
+            const newTasks = snapshot.docs.map(task => ({
                 id: task.id,
                 ...task.data(),
             }));
