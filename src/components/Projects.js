@@ -23,6 +23,6 @@ export const Projects = ({activeValue = null}) => {
             }}><IndividualProject project={project} /></li>
         ))
     )
-}
+};
 
 export default Projects;

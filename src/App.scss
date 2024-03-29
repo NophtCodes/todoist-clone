@@ -231,6 +231,7 @@ header {
       svg {
         color: #cacaca;
       }
+  
     }
 
     &.active,
@@ -349,7 +350,7 @@ header {
     }
 
     button {
-      @include btn(50px);
+      @include btn(70px);
     }
     span {
       @include cancel();
